@@ -45,9 +45,9 @@ function plotWinDrawLost(names, won, draw, lost) {
   var data = new LineData();
   
   data.labels = names;
-  data.datasets[0] = new LineDataset('Wins', won, 'rgba(0, 255, 0, .6)');
-  data.datasets[1] = new LineDataset('Draws', draw, 'rgba(255, 255, 0, .6)');
-  data.datasets[2] = new LineDataset('Losts', lost, 'rgba(255, 0, 0, .6)');
+  data.datasets[0] = new LineDataset('Wins', won, 'rgba(91, 163, 75, .75)');
+  data.datasets[1] = new LineDataset('Draws', draw, 'rgba(252, 239, 58, .75)');
+  data.datasets[2] = new LineDataset('Losses', lost, 'rgb(219, 54, 54, .75)');
   
   var ctx = document.getElementById('winlost').getContext('2d');
   var myChart = new Chart(ctx, 
@@ -77,8 +77,8 @@ function plotSR(sr) {
   var lindGraph = new LineData();
   lindGraph.labels = labelsArr;
   
-  lindGraph.datasets[0] = new LineDataset('Kendrick', sr.Kendrick, "rgba(153,255,51,0.6)");
-  lindGraph.datasets[1] = new LineDataset('Tim', sr.Tim, "rgba(255,153,0,0.6)");
+  lindGraph.datasets[0] = new LineDataset('Kendrick', sr.Kendrick, "rgba(85, 129, 142, 1)");
+  lindGraph.datasets[1] = new LineDataset('Tim', sr.Tim, "rgba(128, 85, 142, 1)");
   
   var ctx = document.getElementById('myChart').getContext('2d');
   myChart = new Chart(ctx, { type: 'line', data: lindGraph });

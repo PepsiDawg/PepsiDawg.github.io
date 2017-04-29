@@ -48,3 +48,18 @@ body {
   margin-top: 50px;
   margin-bottom: 30px;
 }
+
+#reload {
+  position: fixed;
+  top: 25;
+  left: 25;
+  width: 30;
+}
+
+#reload:active {
+  width: 25;
+}
+
+.wlgraph {
+  margin-bottom: 150px;
+}
