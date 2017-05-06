@@ -10,6 +10,7 @@ function parseData(data, tabletop) {
   var sr = [];
   sr["Kendrick"] = [];
   sr["Tim"] = [];
+  sr["Maps"] = [];
   
   for(var index = 0; index < data.length; index++) {
     
@@ -24,6 +25,7 @@ function parseData(data, tabletop) {
     
     sr.Kendrick.push(data[index].Kendrick);
     sr.Tim.push(data[index].Tim);
+    sr.Maps.push(data[index].Map)
   }
   plotSR(sr);
   
@@ -68,14 +70,9 @@ function plotWinDrawLost(names, won, draw, lost) {
 
 function plotSR(sr) {
   var myChart;
-  
-  var labelsArr = [];
-  var size = sr.Kendrick.length;
-  while(size--) { labelsArr.push("SR"); }
-  
     
   var lindGraph = new LineData();
-  lindGraph.labels = labelsArr;
+  lindGraph.labels = sr["Maps"];
   
   lindGraph.datasets[0] = new LineDataset('Kendrick', sr.Kendrick, "rgba(85, 129, 142, 1)");
   lindGraph.datasets[1] = new LineDataset('Tim', sr.Tim, "rgba(128, 85, 142, 1)");
