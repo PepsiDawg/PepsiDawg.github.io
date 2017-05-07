@@ -1,7 +1,9 @@
+
+
 function init() {
   Tabletop.init( { key: 'https://docs.google.com/spreadsheets/d/1u5fSZ3VYJoOrvDQmkdyDT0v4mKQ5ZLePCtMKjztrZ-k/pubhtml',
                    callback: parseData,
-                   simpleSheet: true } )
+                   simpleSheet: true } );
 }
 window.addEventListener('DOMContentLoaded', init);
 
@@ -25,7 +27,9 @@ function parseData(data, tabletop) {
     
     sr.Kendrick.push(data[index].Kendrick);
     sr.Tim.push(data[index].Tim);
+    
     sr.Maps.push(data[index].Map)
+    
   }
   plotSR(sr);
   
@@ -39,7 +43,6 @@ function parseData(data, tabletop) {
     draw.push(matches[map].Draw);
     lost.push(matches[map].Lost);
   }
-  console.log(names, won, draw, lost);
   plotWinDrawLost(names, won, draw, lost);
 }
 
@@ -77,8 +80,27 @@ function plotSR(sr) {
   lindGraph.datasets[0] = new LineDataset('Kendrick', sr.Kendrick, "rgba(85, 129, 142, 1)");
   lindGraph.datasets[1] = new LineDataset('Tim', sr.Tim, "rgba(128, 85, 142, 1)");
   
-  var ctx = document.getElementById('myChart').getContext('2d');
+  var canvas = document.getElementById('myChart');
+  var ctx = canvas.getContext('2d');
   myChart = new Chart(ctx, { type: 'line', data: lindGraph });
 
+  console.log(myChart.options);
+  
   myChart.options.scales.xAxes[0].display = false;
+  myChart.options.tooltips.mode = 'label';
+  myChart.options.tooltips.intersect = false;
+  myChart.options.hover.intersect = false;
+  myChart.options.hover.mode = 'x';
+  myChart.options.tooltips.callbacks.label = function(item, data) {
+    var name = data.datasets[item.datasetIndex].label;
+    var sr = item.yLabel;
+    var change = "";
+    
+    if(item.index > 0) {
+      var prevSR = data.datasets[item.datasetIndex].data[item.index - 1];
+      change = sr - prevSR;
+    }
+    
+    return name + " " + sr + " (" + (change >= 0 ? "+" + change : change) + ")"; 
+  };
 }
